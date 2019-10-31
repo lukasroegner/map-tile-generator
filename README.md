@@ -19,4 +19,27 @@ The output is put into a folder called 'target'.
 
 ## Build
 
-Run `dotnet restore`,  `dotnet build` and `dotnet run` to execute the program.
+Restore packages:
+```
+dotnet restore
+```
+
+Build app:
+```
+dotnet build
+```
+
+Run app:
+```
+dotnet run
+```
+
+Publish app (Windows):
+```
+dotnet publish -c Release -r win-x64 --self-contained
+```
+
+Publish app (Mac):
+```
+dotnet publish -c Release -r osx-x64 --self-contained
+```
