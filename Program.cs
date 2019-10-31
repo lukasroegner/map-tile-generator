@@ -214,13 +214,14 @@ namespace MapTileGenerator
                                 int heightInTile = Math.Min(targetTileSize - offsetYInTile, sourceTileHeight - currentSourceY);
 
                                 // Draws the (partial) image to the maximum zoom factor image
-                                using (Image targetImage = Image.FromFile($"target{Path.DirectorySeparatorChar}{maximumZoomFactor}{Path.DirectorySeparatorChar}{targetTileHorizontalIndex}-{targetTileVerticalIndex}.png"))
+                                File.Delete($"target{Path.DirectorySeparatorChar}{maximumZoomFactor}{Path.DirectorySeparatorChar}{targetTileHorizontalIndex}-{targetTileVerticalIndex}.png");
+                                using (Bitmap targetBitmap = new Bitmap(targetTileSize, targetTileSize))
                                 {
-                                    using (Graphics targetGraphics = Graphics.FromImage(targetImage))
+                                    using (Graphics targetGraphics = Graphics.FromImage(targetBitmap))
                                     {
                                         targetGraphics.DrawImage(sourceImage, new Rectangle(offsetXInTile, offsetYInTile, widthInTile, heightInTile), new Rectangle(currentSourceX, currentSourceY, widthInTile, heightInTile), GraphicsUnit.Pixel);
                                     }
-                                    targetImage.Save($"target{Path.DirectorySeparatorChar}{maximumZoomFactor}{Path.DirectorySeparatorChar}{targetTileHorizontalIndex}-{targetTileVerticalIndex}.png", ImageFormat.Png);
+                                    targetBitmap.Save($"target{Path.DirectorySeparatorChar}{maximumZoomFactor}{Path.DirectorySeparatorChar}{targetTileHorizontalIndex}-{targetTileVerticalIndex}.png", ImageFormat.Png);
                                 }
                                 
                                 currentSourceY = currentSourceY + heightInTile;
